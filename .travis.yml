@@ -3,6 +3,4 @@ jdk:
   - oraclejdk8
 before_install:
   - chmod +x gradlew
-install:
-  - pip install coveralls
 after_success: gradlew jacocoTestReport coveralls
