@@ -2,16 +2,31 @@ plugins {
     id 'java'
     id 'groovy'
     id 'checkstyle'
+    id 'jacoco'
+}
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    testLogging {
+        exceptionFormat = 'full'
+        showStandardStreams = true
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 [compileGroovy, compileTestGroovy]*.options*.encoding = 'UTF-8'
-
-repositories {
-    mavenCentral()
-}
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
