@@ -1,4 +1,4 @@
-spring-boot-unicore
+spring-unicore
 ===================
 
 TODO
