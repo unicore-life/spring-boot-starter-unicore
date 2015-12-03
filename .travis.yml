@@ -8,3 +8,5 @@ before_install:
 
 after_success:
   - ./gradlew jacocoRootReport coveralls
+  - cp -r build/reports/jacoco/jacocoRootReport build/reports/jacoco/jacocoTestReport
+  - ./gradlew coveralls
