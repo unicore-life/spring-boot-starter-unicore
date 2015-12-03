@@ -1,37 +1,67 @@
 plugins {
-    id 'java'
-    id 'groovy'
     id 'checkstyle'
-    id 'jacoco'
     id "com.github.kt3k.coveralls" version "2.4.0x"
 }
 
-dependencies {
-    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'jacoco'
+
+    repositories {
+        mavenCentral()
+    }
 }
 
-jacocoTestReport {
+subprojects {
+    test {
+        testLogging {
+            exceptionFormat = 'full'
+            showStandardStreams = true
+        }
+    }
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+    [compileGroovy, compileTestGroovy]*.options*.encoding = 'UTF-8'
+
+    dependencies {
+        testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    }
+
+    jacocoTestReport {
+        additionalSourceDirs = files(sourceSets.main.allSource.srcDirs)
+        sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+        classDirectories = files(sourceSets.main.output)
+        reports {
+            html.enabled = true
+            xml.enabled = true
+            csv.enabled = false
+        }
+    }
+}
+
+task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
+    dependsOn = subprojects.test
+    additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+    classDirectories = files(subprojects.sourceSets.main.output)
+    executionData = files(subprojects.jacocoTestReport.executionData)
     reports {
+        html.enabled = true
         xml.enabled = true
-        html.enabled = false
+        csv.enabled = false
+    }
+    onlyIf = {
+        true
+    }
+    doFirst {
+        executionData = files(executionData.findAll {
+            it.exists()
+        })
     }
 }
-
-repositories {
-    mavenCentral()
-}
-
-test {
-    testLogging {
-        exceptionFormat = 'full'
-        showStandardStreams = true
-    }
-}
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-[compileGroovy, compileTestGroovy]*.options*.encoding = 'UTF-8'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
