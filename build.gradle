@@ -35,7 +35,7 @@ subprojects {
         sourceDirectories = files(sourceSets.main.allSource.srcDirs)
         classDirectories = files(sourceSets.main.output)
         reports {
-            html.enabled = true
+            html.enabled = false
             xml.enabled = true
             csv.enabled = false
         }
@@ -49,9 +49,11 @@ task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
     classDirectories = files(subprojects.sourceSets.main.output)
     executionData = files(subprojects.jacocoTestReport.executionData)
     reports {
-        html.enabled = true
+        html.enabled = false
         xml.enabled = true
         csv.enabled = false
+
+        xml.destination = "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
     }
     onlyIf = {
         true
