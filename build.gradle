@@ -65,10 +65,7 @@ task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
     }
 }
 
-//coveralls.jacocoReportPath = 'build/reports/coverage/jodd-coverage.xml'
-//coveralls.sourceDirs = ['spring-boot-unicore-starter/src/main/java']
 coveralls.sourceDirs = subprojects.sourceSets.main.allSource.srcDirs.flatten()
-//println subprojects.sourceSets.main.allSource.srcDirs.flatten()
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.9'
