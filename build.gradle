@@ -1,6 +1,6 @@
 plugins {
     id 'checkstyle'
-    id "com.github.kt3k.coveralls" version "2.4.0x"
+    id 'com.github.kt3k.coveralls' version '2.4.0x'
 }
 
 allprojects {
@@ -68,5 +68,5 @@ task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
 coveralls.sourceDirs = subprojects.sourceSets.main.allSource.srcDirs.flatten()
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.9'
+    gradleVersion = '2.10'
 }
