@@ -32,7 +32,7 @@ publish {
     userOrg = 'unicore-life'
     groupId = 'pl.icm.edu.unicore'
     artifactId = project.name
-    publishVersion = '0.1.0'
+    publishVersion = project.version
     uploadName = rootProject.name
 
     desc = 'Spring starter for UNICORE'
