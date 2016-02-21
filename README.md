@@ -5,16 +5,6 @@
 [![Read The Docs](https://readthedocs.org/projects/spring-unicore/badge/?version=latest)](http://spring-unicore.readthedocs.org)
 [![Stories in Ready](https://badge.waffle.io/unicore-life/spring-unicore.svg?label=ready&title=Ready)](http://waffle.io/unicore-life/spring-unicore)
 
-# Configuration
-
-```
-repositories {
-    maven {
-        url "http://dl.bintray.com/unicore-life/maven"
-    }
-}
-```
-
 # Links
 
 * [bintray-release](http://github.com/novoda/bintray-release)
