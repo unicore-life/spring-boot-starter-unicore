@@ -15,7 +15,7 @@ import pl.edu.icm.unicore.spring.security.GridClientHelper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Repository
+//@Repository
 public class UnicoreSite {
     private final UnicoreProperties gridConfig;
     private final GridClientHelper clientHelper;

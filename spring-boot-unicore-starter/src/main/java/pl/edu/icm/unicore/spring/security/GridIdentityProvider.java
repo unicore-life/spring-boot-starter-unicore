@@ -15,7 +15,7 @@ import pl.edu.icm.unicore.spring.UnicoreProperties;
 import java.io.IOException;
 import java.util.Properties;
 
-@Component
+//@Component
 public class GridIdentityProvider {
     private final X509Credential gridCredential;
     private final X509CertChainValidatorExt gridValidator;
