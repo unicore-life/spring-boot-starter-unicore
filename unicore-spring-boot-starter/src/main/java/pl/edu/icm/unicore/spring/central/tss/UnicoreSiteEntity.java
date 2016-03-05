@@ -1,6 +1,5 @@
 package pl.edu.icm.unicore.spring.central.tss;
 
-//import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.w3.x2005.x08.addressing.EndpointReferenceType;
 
 import java.io.Serializable;
@@ -16,7 +15,7 @@ public class UnicoreSiteEntity implements Serializable {
         return uri;
     }
 
-//    @JsonIgnore
+    //    @JsonIgnore
     public EndpointReferenceType getEpr() {
         EndpointReferenceType epr = EndpointReferenceType.Factory.newInstance();
         epr.addNewAddress().setStringValue(this.uri);

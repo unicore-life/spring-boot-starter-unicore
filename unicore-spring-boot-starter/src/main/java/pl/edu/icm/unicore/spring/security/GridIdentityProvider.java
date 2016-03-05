@@ -9,13 +9,13 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.edu.icm.unicore.spring.UnicoreProperties;
 
 import java.io.IOException;
 import java.util.Properties;
 
-//@Component
+@Service
 public class GridIdentityProvider {
     private final X509Credential gridCredential;
     private final X509CertChainValidatorExt gridValidator;
