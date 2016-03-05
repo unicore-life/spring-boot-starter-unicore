@@ -4,24 +4,22 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "unicore")
 public final class UnicoreProperties {
-    //    @Value("${identityConfig:classpath:grid-test.properties}")
-    private String identityConfig = "classpath:grid-test.properties2";
-    //    @Value("${registry:5000}")
-    private String registry = "reg";
+    private String identityConfig = "./config/grid-identity.properties";
+    private String registryUri = "https://localhost:8080/REGISTRY/services/Registry?res=default_registry";
 
     public String getIdentityConfig() {
         return identityConfig;
-    }
-
-    public String getRegistry() {
-        return registry;
     }
 
     public void setIdentityConfig(String identityConfig) {
         this.identityConfig = identityConfig;
     }
 
-    public void setRegistry(String registry) {
-        this.registry = registry;
+    public String getRegistryUri() {
+        return registryUri;
+    }
+
+    public void setRegistryUri(String registryUri) {
+        this.registryUri = registryUri;
     }
 }

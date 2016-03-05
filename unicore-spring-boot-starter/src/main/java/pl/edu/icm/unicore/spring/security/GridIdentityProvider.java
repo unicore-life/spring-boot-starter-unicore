@@ -4,6 +4,8 @@ import eu.emi.security.authn.x509.X509CertChainValidatorExt;
 import eu.emi.security.authn.x509.X509Credential;
 import eu.unicore.security.canl.TrustedIssuersProperties;
 import eu.unicore.util.httpclient.ClientProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
@@ -50,6 +52,8 @@ public class GridIdentityProvider {
 
     private Resource prepareResource(UnicoreProperties gridConfig) {
         String identityConfig = gridConfig.getIdentityConfig();
+        logger.info(String.format("Using grid identity configuration from %s", identityConfig));
+
         if (identityConfig.startsWith("classpath:")) {
             int prefixOffset = "classpath:".length();
             return new ClassPathResource(identityConfig.substring(prefixOffset));
@@ -58,4 +62,6 @@ public class GridIdentityProvider {
             return new FileSystemResource(identityConfig.substring(prefixOffset));
         }
     }
+
+    private static final Logger logger = LoggerFactory.getLogger(GridIdentityProvider.class);
 }

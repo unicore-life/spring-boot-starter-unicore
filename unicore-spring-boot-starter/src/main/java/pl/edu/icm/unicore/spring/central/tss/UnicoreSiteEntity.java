@@ -14,11 +14,4 @@ public class UnicoreSiteEntity implements Serializable {
     public String getUri() {
         return uri;
     }
-
-    //    @JsonIgnore
-    public EndpointReferenceType getEpr() {
-        EndpointReferenceType epr = EndpointReferenceType.Factory.newInstance();
-        epr.addNewAddress().setStringValue(this.uri);
-        return epr;
-    }
 }

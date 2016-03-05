@@ -7,7 +7,6 @@ import eu.unicore.util.httpclient.IClientConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.w3.x2005.x08.addressing.EndpointReferenceType;
 import pl.edu.icm.unicore.spring.UnicoreProperties;
 import pl.edu.icm.unicore.spring.security.GridClientHelper;
@@ -32,7 +31,7 @@ public class UnicoreSite {
     }
 
     private List<UnicoreSiteEntity> collectTargetSystemList(IClientConfiguration clientConfiguration) {
-        String registryUrl = gridConfig.getRegistry();
+        String registryUrl = gridConfig.getRegistryUri();
         EndpointReferenceType registryEpr = EndpointReferenceType.Factory.newInstance();
         registryEpr.addNewAddress().setStringValue(registryUrl);
         try {
