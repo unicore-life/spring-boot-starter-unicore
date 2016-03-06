@@ -1,6 +1,6 @@
 plugins {
     id 'checkstyle'
-    id "com.github.kt3k.coveralls" version "2.4.0x"
+    id 'com.github.kt3k.coveralls' version '2.4.0x'
 }
 
 allprojects {
