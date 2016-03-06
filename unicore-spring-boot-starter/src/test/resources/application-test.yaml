@@ -1,1 +1,2 @@
 unicore.identityConfig: classpath:grid-test.properties
+unicore.registryUri: http://localhost:8080/REGISTRY/services/Registry?res=default_registry
