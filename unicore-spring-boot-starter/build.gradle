@@ -18,14 +18,14 @@ apply plugin: 'com.novoda.bintray-release'
 dependencies {
     def springBootVersion = '1.3.3.RELEASE'
 
-    compile 'org.slf4j:slf4j-api:1.7.13',
+    compile 'org.slf4j:slf4j-api:1.7.19',
             "org.springframework.boot:spring-boot:${springBootVersion}",
             "org.springframework.boot:spring-boot-autoconfigure:${springBootVersion}",
             'eu.unicore.workflow:common:2.8.2',
-            'eu.unicore:uas-client:1.9.5-SNAPSHOT'
+            'eu.unicore:uas-client:1.9.5'
 
     testCompile 'com.github.tomakehurst:wiremock:1.58',
-            'cglib:cglib-nodep:3.2.0',
+            'cglib:cglib-nodep:3.2.1',
             'org.objenesis:objenesis:2.2',
             'org.spockframework:spock-core:1.0-groovy-2.4',
             'org.spockframework:spock-spring:1.0-groovy-2.4',
