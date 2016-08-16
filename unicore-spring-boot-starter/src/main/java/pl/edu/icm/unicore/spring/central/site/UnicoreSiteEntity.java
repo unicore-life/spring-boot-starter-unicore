@@ -6,19 +6,19 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class UnicoreSiteEntity implements Serializable {
-    private final String uri;
+    private final EndpointReferenceType endpointReferenceType;
 
-    public UnicoreSiteEntity(EndpointReferenceType uri) {
-        this.uri = uri.getAddress().getStringValue();
+    public UnicoreSiteEntity(EndpointReferenceType endpointReferenceType) {
+        this.endpointReferenceType = endpointReferenceType;
     }
 
-    public String getUri() {
-        return uri;
+    public String getEndpointAddress() {
+        return endpointReferenceType.getAddress().getStringValue();
     }
 
     @Override
     public String toString() {
-        return String.format("UnicoreSiteEntity{uri='%s'}", uri);
+        return String.format("UnicoreSiteEntity{endpointReferenceType=%s}", endpointReferenceType);
     }
 
     @Override
@@ -26,11 +26,11 @@ public class UnicoreSiteEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UnicoreSiteEntity that = (UnicoreSiteEntity) o;
-        return Objects.equals(uri, that.uri);
+        return Objects.equals(endpointReferenceType, that.endpointReferenceType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uri);
+        return Objects.hash(endpointReferenceType);
     }
 }
