@@ -12,6 +12,10 @@ public class UnicoreSiteEntity implements Serializable {
         this.endpointReferenceType = endpointReferenceType;
     }
 
+    public EndpointReferenceType getEndpointReferenceType() {
+        return endpointReferenceType;
+    }
+
     public String getEndpointAddress() {
         return endpointReferenceType.getAddress().getStringValue();
     }
