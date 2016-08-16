@@ -6,19 +6,23 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class UnicoreBrokerEntity implements Serializable {
-    private final String uri;
+    private final EndpointReferenceType endpointReferenceType;
 
-    public UnicoreBrokerEntity(EndpointReferenceType epr) {
-        this.uri = epr.getAddress().getStringValue();
+    public UnicoreBrokerEntity(EndpointReferenceType endpointReferenceType) {
+        this.endpointReferenceType = endpointReferenceType;
     }
 
-    public String getUri() {
-        return uri;
+    public EndpointReferenceType getEndpointReferenceType() {
+        return endpointReferenceType;
+    }
+
+    public String getEndpointAddress() {
+        return endpointReferenceType.getAddress().getStringValue();
     }
 
     @Override
     public String toString() {
-        return String.format("UnicoreBrokerEntity{uri='%s'}", uri);
+        return String.format("UnicoreBrokerEntity{endpointReferenceType=%s}", endpointReferenceType);
     }
 
     @Override
@@ -26,11 +30,11 @@ public class UnicoreBrokerEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UnicoreBrokerEntity that = (UnicoreBrokerEntity) o;
-        return Objects.equals(uri, that.uri);
+        return Objects.equals(endpointReferenceType, that.endpointReferenceType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uri);
+        return Objects.hash(endpointReferenceType);
     }
 }
