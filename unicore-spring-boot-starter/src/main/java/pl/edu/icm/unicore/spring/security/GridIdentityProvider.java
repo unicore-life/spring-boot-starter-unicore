@@ -23,6 +23,9 @@ public class GridIdentityProvider {
     private final X509CertChainValidatorExt gridValidator;
     private final X509CertChainValidatorExt idpValidator;
 
+    /**
+     * Component initializing service identity based on configuration.
+     */
     @Autowired
     public GridIdentityProvider(UnicoreProperties gridConfig) throws IOException {
         Resource resource = prepareResource(gridConfig);
