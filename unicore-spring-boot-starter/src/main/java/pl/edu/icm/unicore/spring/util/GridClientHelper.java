@@ -19,6 +19,12 @@ public class GridClientHelper {
         this.identityProvider = identityProvider;
     }
 
+    /**
+     * Creates client configuration based on trust delegation.
+     *
+     * @param trustDelegation Trust delegation issued for service.
+     * @return Client configuration with ETD.
+     */
     public IClientConfiguration createClientConfiguration(TrustDelegation trustDelegation) {
         DefaultClientConfiguration clientConfiguration = new DefaultClientConfiguration(
                 identityProvider.getGridValidator(),

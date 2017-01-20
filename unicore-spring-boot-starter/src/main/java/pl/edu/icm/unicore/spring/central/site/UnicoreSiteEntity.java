@@ -26,10 +26,14 @@ public class UnicoreSiteEntity implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UnicoreSiteEntity that = (UnicoreSiteEntity) o;
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        UnicoreSiteEntity that = (UnicoreSiteEntity) other;
         return Objects.equals(endpointReferenceType, that.endpointReferenceType);
     }
 

@@ -26,10 +26,14 @@ public class UnicoreBrokerEntity implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UnicoreBrokerEntity that = (UnicoreBrokerEntity) o;
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+        UnicoreBrokerEntity that = (UnicoreBrokerEntity) other;
         return Objects.equals(endpointReferenceType, that.endpointReferenceType);
     }
 

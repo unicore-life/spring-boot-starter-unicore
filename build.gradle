@@ -1,19 +1,28 @@
 plugins {
-    id 'checkstyle'
     id 'com.github.kt3k.coveralls' version '2.4.0x'
 }
 
 allprojects {
-    apply plugin: 'java'
-    apply plugin: 'groovy'
     apply plugin: 'jacoco'
 
     repositories {
         mavenCentral()
     }
+
+    project.ext.versions = [
+            springBoot: '1.4.3.RELEASE',
+            spock     : '1.0-groovy-2.4',
+
+            checkstyle: '6.3',
+            gradle    : '3.3'
+    ]
 }
 
 subprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'checkstyle'
+
     test {
         testLogging {
             exceptionFormat = 'full'
@@ -27,7 +36,7 @@ subprojects {
     [compileGroovy, compileTestGroovy]*.options*.encoding = 'UTF-8'
 
     dependencies {
-        testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+        testCompile "org.spockframework:spock-core:${versions.spock}"
     }
 
     jacocoTestReport {
@@ -39,6 +48,21 @@ subprojects {
             xml.enabled = true
             csv.enabled = false
         }
+    }
+
+    configurations {
+        checkstyleConfig {
+            transitive = false
+        }
+    }
+
+    dependencies {
+        checkstyleConfig "com.puppycrawl.tools:checkstyle:${versions.checkstyle}"
+    }
+
+    checkstyle {
+        toolVersion = "${versions.checkstyle}"
+        config = resources.text.fromFile(rootProject.file('config/checkstyle/checkstyle.xml'))
     }
 }
 
@@ -68,5 +92,5 @@ task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
 coveralls.sourceDirs = subprojects.sourceSets.main.allSource.srcDirs.flatten()
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.14.1'
+    gradleVersion = "${versions.gradle}"
 }
