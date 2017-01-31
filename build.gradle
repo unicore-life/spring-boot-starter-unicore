@@ -10,7 +10,7 @@ allprojects {
     }
 
     project.ext.versions = [
-            springBoot: '1.5.0.RC1',
+            springBoot: '1.5.1.RELEASE',
             spock     : '1.1-groovy-2.4-rc-3',
 
             checkstyle: '6.3',
