@@ -22,6 +22,8 @@ dependencies {
             'eu.unicore.workflow:common:2.8.4',
             'eu.unicore:uas-client:1.9.6'
 
+//    optional "org.springframework.boot:spring-boot-configuration-processor:${versions.springBoot}"
+
     testCompile 'com.github.tomakehurst:wiremock:2.5.0',
             'cglib:cglib-nodep:3.2.4',
             'org.objenesis:objenesis:2.5.1',
@@ -29,6 +31,8 @@ dependencies {
             "org.spockframework:spock-spring:${versions.spock}",
             "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
 }
+
+//compileJava.dependsOn(processResources)
 
 repositories {
     mavenCentral()
@@ -43,6 +47,6 @@ publish {
     publishVersion = project.version
     uploadName = rootProject.name
 
-    desc = 'Spring starter for UNICORE.'
+    desc = 'Spring starter for Unity IDM.'
     website = "http://github.com/unicore-life/${rootProject.name}"
 }

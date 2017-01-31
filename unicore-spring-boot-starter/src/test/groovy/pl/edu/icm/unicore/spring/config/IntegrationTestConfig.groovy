@@ -1,11 +1,11 @@
 package pl.edu.icm.unicore.spring.config
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
-import org.springframework.context.annotation.Configuration
+import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Import
 import pl.edu.icm.unicore.spring.UnicoreAutoConfiguration
 
-@Configuration
+@TestConfiguration
 @EnableAutoConfiguration
 @Import(UnicoreAutoConfiguration)
 class IntegrationTestConfig {
