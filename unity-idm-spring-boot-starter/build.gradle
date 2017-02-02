@@ -1,6 +1,6 @@
 buildscript {
     repositories { jcenter() }
-    dependencies { classpath 'com.novoda:bintray-release:0.3.5' }
+    dependencies { classpath 'com.novoda:bintray-release:0.4.0' }
 }
 
 plugins {
@@ -17,12 +17,12 @@ apply plugin: 'com.novoda.bintray-release'
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.22',
-            "org.springframework.boot:spring-boot:${versions.springBoot}",
+            "org.springframework.boot:spring-boot-starter:${versions.springBoot}",
+            "org.springframework.boot:spring-boot-starter-web:${versions.springBoot}",
+            "org.springframework.boot:spring-boot-starter-security:${versions.springBoot}",
             "org.springframework.boot:spring-boot-autoconfigure:${versions.springBoot}",
             'eu.unicore.workflow:common:2.8.4',
             'eu.unicore:uas-client:1.9.6'
-
-//    optional "org.springframework.boot:spring-boot-configuration-processor:${versions.springBoot}"
 
     testCompile 'com.github.tomakehurst:wiremock:2.5.0',
             'cglib:cglib-nodep:3.2.4',
@@ -36,7 +36,6 @@ dependencies {
 
 repositories {
     mavenCentral()
-    maven { url 'https://repo.spring.io/milestone' }
     maven { url 'http://unicore-dev.zam.kfa-juelich.de/maven' }
 }
 
