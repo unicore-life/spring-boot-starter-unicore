@@ -5,7 +5,7 @@ buildscript {
 
 scmVersion.tag.prefix = project.name
 
-group 'pl.edu.icm.unicore'
+group 'pl.edu.icm.unity'
 project.version = scmVersion.version
 
 apply plugin: 'com.novoda.bintray-release'
@@ -13,10 +13,11 @@ apply plugin: 'com.novoda.bintray-release'
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.22',
-            "org.springframework.boot:spring-boot:${versions.springBoot}",
+            "org.springframework.boot:spring-boot-starter:${versions.springBoot}",
+            "org.springframework.boot:spring-boot-starter-web:${versions.springBoot}",
+            "org.springframework.boot:spring-boot-starter-security:${versions.springBoot}",
             "org.springframework.boot:spring-boot-autoconfigure:${versions.springBoot}",
-            'eu.unicore.workflow:common:2.8.4',
-            'eu.unicore:uas-client:1.9.6'
+            'eu.unicore.security:securityLibrary:4.3.4'
 
     testCompile "com.github.tomakehurst:wiremock:${versions.wiremock}",
             'cglib:cglib-nodep:3.2.4',
@@ -25,6 +26,12 @@ dependencies {
             "org.spockframework:spock-spring:${versions.spock}",
             "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
 }
+
+configurations {
+    all*.exclude module: 'spring-boot-starter-logging'
+}
+
+//compileJava.dependsOn(processResources)
 
 repositories {
     mavenCentral()
@@ -38,6 +45,6 @@ publish {
     publishVersion = project.version
     uploadName = rootProject.name
 
-    desc = 'Spring starter for UNICORE.'
+    desc = 'Spring starter for Unity IDM.'
     website = "http://github.com/unicore-life/${rootProject.name}"
 }
