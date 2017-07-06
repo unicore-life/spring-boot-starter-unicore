@@ -1,19 +1,16 @@
 package pl.edu.icm.unity.spring.authn;
 
 import eu.unicore.security.etd.TrustDelegation;
-import pl.edu.icm.unity.spring.user.UserAttributes;
+import pl.edu.icm.unity.spring.slo.UserUnityAttributes;
 
 import java.util.List;
 
-/**
- * Created by rafal.kluszczynski on 02/02/17.
- */
 public class SamlResponseData {
     private String returnUrl;
     private String sessionIndex;
 
     private List<TrustDelegation> trustDelegations;
-    private UserAttributes userAttributes = new UserAttributes();
+    private UserUnityAttributes userUnityAttributes = new UserUnityAttributes();
 
     public String getReturnUrl() {
         return returnUrl;
@@ -31,8 +28,16 @@ public class SamlResponseData {
         this.sessionIndex = sessionIndex;
     }
 
+    public UserUnityAttributes getUserUnityAttributes() {
+        return userUnityAttributes;
+    }
+
     public void storeAttribute(String key, String value) {
-        userAttributes.store(key, value);
+        userUnityAttributes.store(key, value);
+    }
+
+    public List<TrustDelegation> getTrustDelegations() {
+        return trustDelegations;
     }
 
     public void storeTrustDelegations(List<TrustDelegation> trustDelegationList) {

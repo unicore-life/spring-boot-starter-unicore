@@ -3,10 +3,6 @@ buildscript {
     dependencies { classpath 'com.novoda:bintray-release:0.4.0' }
 }
 
-plugins {
-    id 'pl.allegro.tech.build.axion-release' version '1.4.1'
-}
-
 scmVersion.tag.prefix = project.name
 
 group 'pl.edu.icm.unicore'
@@ -22,7 +18,7 @@ dependencies {
             'eu.unicore.workflow:common:2.8.4',
             'eu.unicore:uas-client:1.9.6'
 
-    testCompile 'com.github.tomakehurst:wiremock:2.5.0',
+    testCompile "com.github.tomakehurst:wiremock:${versions.wiremock}",
             'cglib:cglib-nodep:3.2.4',
             'org.objenesis:objenesis:2.5.1',
             "org.spockframework:spock-core:${versions.spock}",

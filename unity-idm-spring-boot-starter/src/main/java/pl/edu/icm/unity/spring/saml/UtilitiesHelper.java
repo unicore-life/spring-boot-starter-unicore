@@ -1,4 +1,4 @@
-package pl.edu.icm.unity.spring.authn;
+package pl.edu.icm.unity.spring.saml;
 
 import eu.unicore.samly2.SAMLConstants;
 import eu.unicore.samly2.elements.NameID;
@@ -14,10 +14,8 @@ import xmlbeans.org.oasis.saml2.assertion.NameIDType;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 
-final class Utils {
-
-    private Utils() {
-    }
+final class UtilitiesHelper {
+    static final long DEFAULT_LOGOUT_REQUEST_VALIDITY_IN_MILLIS = 60000;
 
     static void configureHttpResponse(HttpServletResponse response) {
         response.setContentType(String.format("%s; charset=%s", MediaType.TEXT_HTML, StandardCharsets.UTF_8));
@@ -45,5 +43,6 @@ final class Utils {
         }
     }
 
-    static final long DEFAULT_LOGOUT_REQUEST_VALIDITY_IN_MILLIS = 60000;
+    private UtilitiesHelper() {
+    }
 }

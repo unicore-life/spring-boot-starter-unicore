@@ -3,13 +3,9 @@ buildscript {
     dependencies { classpath 'com.novoda:bintray-release:0.4.0' }
 }
 
-plugins {
-    id 'pl.allegro.tech.build.axion-release' version '1.4.1'
-}
-
 scmVersion.tag.prefix = project.name
 
-group 'pl.edu.icm.unicore'
+group 'pl.edu.icm.unity'
 project.version = scmVersion.version
 
 apply plugin: 'com.novoda.bintray-release'
@@ -21,15 +17,18 @@ dependencies {
             "org.springframework.boot:spring-boot-starter-web:${versions.springBoot}",
             "org.springframework.boot:spring-boot-starter-security:${versions.springBoot}",
             "org.springframework.boot:spring-boot-autoconfigure:${versions.springBoot}",
-            'eu.unicore.workflow:common:2.8.4',
-            'eu.unicore:uas-client:1.9.6'
+            'eu.unicore.security:securityLibrary:4.3.4'
 
-    testCompile 'com.github.tomakehurst:wiremock:2.5.0',
+    testCompile "com.github.tomakehurst:wiremock:${versions.wiremock}",
             'cglib:cglib-nodep:3.2.4',
             'org.objenesis:objenesis:2.5.1',
             "org.spockframework:spock-core:${versions.spock}",
             "org.spockframework:spock-spring:${versions.spock}",
             "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
+}
+
+configurations {
+    all*.exclude module: 'spring-boot-starter-logging'
 }
 
 //compileJava.dependsOn(processResources)

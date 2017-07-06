@@ -1,11 +1,11 @@
-package pl.edu.icm.unity.spring.user;
+package pl.edu.icm.unity.spring.slo;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class UserAttributes {
+public class UserUnityAttributes {
     private String commonName;
     private String emailAddress;
     private String custodianDN;
@@ -13,32 +13,36 @@ public class UserAttributes {
     private final Set<String> memberGroups = new TreeSet<>();
     private final Map<String, String> others = new ConcurrentHashMap<>();
 
-    public UserAttributes() {
+    public UserUnityAttributes() {
     }
 
-    String getCommonName() {
+    public String getCommonName() {
         return commonName;
     }
 
-    String getEmailAddress() {
+    public String getEmailAddress() {
         return emailAddress;
     }
 
-    String getCustodianDN() {
+    public String getCustodianDN() {
         return custodianDN;
     }
 
-    Set<String> getMemberGroups() {
+    public Set<String> getMemberGroups() {
         return memberGroups;
     }
 
-    String getAttribute(String key) {
+    public String getAttribute(String key) {
         return others.get(key);
+    }
+
+    public Map<String, String> getOthers() {
+        return others;
     }
 
     @Override
     public String toString() {
-        return String.format("UserAttributes{commonName='%s', emailAddress='%s', custodianDN='%s', memberGroups=%s}",
+        return String.format("UserUnityAttributes{commonName='%s', emailAddress='%s', custodianDN='%s', memberGroups=%s}",
                 commonName, emailAddress, custodianDN, memberGroups);
     }
 

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-pl.edu.icm.unicore.spring.UnityAutoConfiguration
+pl.edu.icm.unity.spring.UnityAutoConfiguration

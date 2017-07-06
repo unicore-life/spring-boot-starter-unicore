@@ -1,4 +1,4 @@
-package pl.edu.icm.unity.spring.authn;
+package pl.edu.icm.unity.spring.saml;
 
 import eu.unicore.samly2.SAMLUtils;
 import org.apache.xmlbeans.SimpleValue;

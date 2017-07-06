@@ -1,10 +1,11 @@
-package pl.edu.icm.unity.spring.authn;
+package pl.edu.icm.unity.spring.saml;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static java.util.Collections.synchronizedList;
 
 final class EtdAttributeData {
     private final Map<String, List<String>> attributes = new ConcurrentHashMap<>();
@@ -14,14 +15,14 @@ final class EtdAttributeData {
 
     void put(String name, String value) {
         if (attributes.get(name) == null) {
-            attributes.put(name, Collections.synchronizedList(new ArrayList()));
+            attributes.put(name, synchronizedList(new ArrayList()));
         }
         attributes.get(name).add(value);
     }
 
     void put(String name, List<String> values) {
         if (attributes.get(name) == null) {
-            attributes.put(name, Collections.synchronizedList(new ArrayList()));
+            attributes.put(name, synchronizedList(new ArrayList()));
         }
         attributes.get(name).addAll(values);
     }

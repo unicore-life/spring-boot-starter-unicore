@@ -1,4 +1,4 @@
-package pl.edu.icm.unity.spring.authn;
+package pl.edu.icm.unity.spring.saml;
 
 import eu.emi.security.authn.x509.X509Credential;
 import eu.unicore.samly2.SAMLConstants;
@@ -8,8 +8,6 @@ import eu.unicore.samly2.proto.AuthnRequest;
 import eu.unicore.security.dsig.DSigException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Component;
-import pl.edu.icm.unity.spring.api.IdentityProvider;
 import xmlbeans.org.oasis.saml2.assertion.NameIDType;
 import xmlbeans.org.oasis.saml2.protocol.AuthnRequestDocument;
 
@@ -18,25 +16,20 @@ import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static pl.edu.icm.unity.spring.authn.Utils.configureHttpResponse;
-import static pl.edu.icm.unity.spring.authn.Utils.convertDistinguishedNameToNameID;
-
-
-@Component
-class SamlRequestHandler {
+public class SamlRequestHandler {
 
     void performAuthenticationRequest(HttpServletResponse response,
                                       String idpUrl,
                                       String authenticationRequestId,
                                       String targetUrl,
-                                      IdentityProvider idProvider) {
+                                      X509Credential gridCredential) {
         try {
             AuthnRequest authnRequest = createRequest(idpUrl, targetUrl,
-                    idProvider.getGridCredential(), authenticationRequestId);
+                    gridCredential, authenticationRequestId);
             AuthnRequestDocument authnRequestDocument = AuthnRequestDocument.Factory.parse(
                     authnRequest.getXMLBeanDoc().xmlText());
 
-            configureHttpResponse(response);
+            UtilitiesHelper.configureHttpResponse(response);
             String htmlFormContent = HttpPostBindingSupport.getHtmlPOSTFormContents(
                     SAMLMessageType.SAMLRequest,
                     idpUrl,
@@ -57,7 +50,7 @@ class SamlRequestHandler {
                                        X509Credential x509Credential,
                                        String requestId) throws DSigException, URISyntaxException {
         final URI samlServletUri = new URI(serviceProviderTargetUrl);
-        final NameIDType requestIssuer = convertDistinguishedNameToNameID(x509Credential.getSubjectName());
+        final NameIDType requestIssuer = UtilitiesHelper.convertDistinguishedNameToNameID(x509Credential.getSubjectName());
 
         AuthnRequest request = new AuthnRequest(requestIssuer);
         request.setFormat(SAMLConstants.NFORMAT_DN);

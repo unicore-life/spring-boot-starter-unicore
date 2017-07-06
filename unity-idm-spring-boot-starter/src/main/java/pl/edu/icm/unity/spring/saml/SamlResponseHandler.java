@@ -1,5 +1,7 @@
-package pl.edu.icm.unity.spring.authn;
+package pl.edu.icm.unity.spring.saml;
 
+import eu.emi.security.authn.x509.X509CertChainValidatorExt;
+import eu.emi.security.authn.x509.X509Credential;
 import eu.unicore.samly2.SAMLBindings;
 import eu.unicore.samly2.exceptions.SAMLValidationException;
 import eu.unicore.samly2.trust.SamlTrustChecker;
@@ -10,8 +12,8 @@ import eu.unicore.samly2.validators.SSOAuthnResponseValidator;
 import eu.unicore.security.etd.TrustDelegation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Component;
-import pl.edu.icm.unity.spring.api.IdentityProvider;
+import pl.edu.icm.unity.spring.authn.UnprocessableResponseException;
+import pl.edu.icm.unity.spring.authn.SamlResponseData;
 import xmlbeans.org.oasis.saml2.assertion.AssertionDocument;
 import xmlbeans.org.oasis.saml2.assertion.AuthnStatementType;
 import xmlbeans.org.oasis.saml2.protocol.ResponseDocument;
@@ -25,19 +27,19 @@ import java.util.stream.Collectors;
 
 import static eu.unicore.samly2.trust.CheckingMode.REQUIRE_SIGNED_RESPONSE_OR_ASSERTION;
 
-@Component
-class SamlResponseHandler {
+public class SamlResponseHandler {
 
     SamlResponseData processAuthenticationResponse(HttpServletRequest request,
                                                    String authenticationRequestId,
                                                    String targetUrl,
-                                                   IdentityProvider identityProvider) {
+                                                   X509Credential gridCredential,
+                                                   X509CertChainValidatorExt idpValidator) {
         String samlResponse = request.getParameter("SAMLResponse");
         final SamlResponseData responseData = new SamlResponseData();
         try {
-            ResponseDocument responseDocument = Utils.decodeMessage(samlResponse, log);
-            final SSOAuthnResponseValidator validator =
-                    validateSamlResponse(responseDocument, authenticationRequestId, targetUrl, identityProvider);
+            ResponseDocument responseDocument = UtilitiesHelper.decodeMessage(samlResponse, log);
+            final SSOAuthnResponseValidator validator = validateSamlResponse(
+                    responseDocument, authenticationRequestId, targetUrl, gridCredential, idpValidator);
 
             final String sessionIndex = extractSessionIndex(validator);
             log.trace(String.format("Authority session index: %s", sessionIndex));
@@ -78,14 +80,15 @@ class SamlResponseHandler {
     private SSOAuthnResponseValidator validateSamlResponse(ResponseDocument response,
                                                            String requestId,
                                                            String targetUrl,
-                                                           IdentityProvider idProvider)
+                                                           X509Credential gridCredential,
+                                                           X509CertChainValidatorExt idpValidator)
             throws URISyntaxException, SAMLValidationException {
         SamlTrustChecker trustChecker = new TruststoreBasedSamlTrustChecker(
-                idProvider.getIdpValidator(),
+                idpValidator,
                 REQUIRE_SIGNED_RESPONSE_OR_ASSERTION
         );
         SSOAuthnResponseValidator validator = new SSOAuthnResponseValidator(
-                idProvider.getGridCredential().getSubjectName(),
+                gridCredential.getSubjectName(),
                 new URI(targetUrl).toASCIIString(),
                 requestId,
                 AssertionValidator.DEFAULT_VALIDITY_GRACE_PERIOD,
