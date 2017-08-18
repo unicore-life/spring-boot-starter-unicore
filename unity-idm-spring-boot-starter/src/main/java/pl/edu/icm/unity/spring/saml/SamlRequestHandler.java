@@ -16,6 +16,8 @@ import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import static pl.edu.icm.unity.spring.saml.UtilitiesHelper.convertDistinguishedNameToNameIdType;
+
 public class SamlRequestHandler {
 
     void performAuthenticationRequest(HttpServletResponse response,
@@ -50,7 +52,7 @@ public class SamlRequestHandler {
                                        X509Credential x509Credential,
                                        String requestId) throws DSigException, URISyntaxException {
         final URI samlServletUri = new URI(serviceProviderTargetUrl);
-        final NameIDType requestIssuer = UtilitiesHelper.convertDistinguishedNameToNameID(x509Credential.getSubjectName());
+        final NameIDType requestIssuer = convertDistinguishedNameToNameIdType(x509Credential.getSubjectName());
 
         AuthnRequest request = new AuthnRequest(requestIssuer);
         request.setFormat(SAMLConstants.NFORMAT_DN);

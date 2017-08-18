@@ -17,6 +17,13 @@ public class SamlAuthenticationHandler {
     private final SamlResponseHandler samlResponseHandler;
     private final UnityIdmProperties unityIdmProperties;
 
+    /**
+     * Constructor of class handling SAML authentication.
+     *
+     * @param samlRequestHandler  SAML request handler
+     * @param samlResponseHandler SAML response handler
+     * @param unityIdmProperties  unity idm properties
+     */
     public SamlAuthenticationHandler(SamlRequestHandler samlRequestHandler,
                                      SamlResponseHandler samlResponseHandler,
                                      UnityIdmProperties unityIdmProperties) {
@@ -25,6 +32,13 @@ public class SamlAuthenticationHandler {
         this.unityIdmProperties = unityIdmProperties;
     }
 
+    /**
+     * Method handling SAML authentication response.
+     *
+     * @param response                response
+     * @param authenticationRequestId authentication request unique ID
+     * @param gridCredential          client credentials
+     */
     public void performAuthenticationRequest(HttpServletResponse response,
                                              String authenticationRequestId,
                                              X509Credential gridCredential) {
@@ -35,6 +49,15 @@ public class SamlAuthenticationHandler {
                 gridCredential);
     }
 
+    /**
+     * Method processing SAML authentication request.
+     *
+     * @param request                 request
+     * @param authenticationRequestId authentication request unique ID
+     * @param gridCredential          client credentials
+     * @param idpValidator            identity provider validator
+     * @return SAML response data
+     */
     public SamlResponseData processAuthenticationResponse(HttpServletRequest request,
                                                           String authenticationRequestId,
                                                           X509Credential gridCredential,
@@ -43,6 +66,12 @@ public class SamlAuthenticationHandler {
                 request, authenticationRequestId, unityIdmProperties.getTargetUrl(), gridCredential, idpValidator);
     }
 
+    /**
+     * Method processing Single Logout response.
+     *
+     * @param request request
+     * @return Redirect string
+     */
     public String processSingleLogoutResponse(HttpServletRequest request) {
         try {
             final String samlResponse = request.getParameter("SAMLResponse");

@@ -30,8 +30,9 @@ public class UnityAutoConfiguration {
 
     @Autowired
     @Bean
-    public UnitySingleLogoutHandlerSupplier unitySingleLogoutHandlerSupplier(SamlSingleLogoutHandler singleLogoutHandler,
-                                                                             UnityIdmProperties unityIdmProperties) {
+    public UnitySingleLogoutHandlerSupplier unitySingleLogoutHandlerSupplier(
+            SamlSingleLogoutHandler singleLogoutHandler,
+            UnityIdmProperties unityIdmProperties) {
         return new UnitySingleLogoutHandlerSupplier(singleLogoutHandler, unityIdmProperties);
     }
 

@@ -24,7 +24,13 @@ final class UtilitiesHelper {
         response.setDateHeader(HttpHeaders.EXPIRES, -1);
     }
 
-    static NameIDType convertDistinguishedNameToNameID(String distinguishedName) {
+    /**
+     * Helper method that converts distinguished name in text format to {@see NameIdType}.
+     *
+     * @param distinguishedName Distinguished name
+     * @return NameIdType of DN
+     */
+    static NameIDType convertDistinguishedNameToNameIdType(String distinguishedName) {
         return new NameID(distinguishedName, SAMLConstants.NFORMAT_DN)
                 .getXBean();
     }
