@@ -15,8 +15,22 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 
+import static pl.edu.icm.unity.spring.saml.UtilitiesHelper.DEFAULT_LOGOUT_REQUEST_VALIDITY_IN_MILLIS;
+import static pl.edu.icm.unity.spring.saml.UtilitiesHelper.configureHttpResponse;
+import static pl.edu.icm.unity.spring.saml.UtilitiesHelper.convertDistinguishedNameToNameIdType;
+
 public class SamlSingleLogoutHandler {
 
+    /**
+     * TODO.
+     *
+     * @param response                response
+     * @param singleLogoutEndpointUrl single logout endpoint url
+     * @param principalCommonName     principal common name
+     * @param sessionIndex            session index
+     * @param gridCredential          client credentials
+     * @return true if single logout was processed successfully
+     */
     public boolean performSingleLogoutRequest(HttpServletResponse response,
                                               final String singleLogoutEndpointUrl,
                                               final String principalCommonName,
@@ -32,7 +46,7 @@ public class SamlSingleLogoutHandler {
                     singleLogoutEndpointUrl, principalCommonName, sessionIndex, localSamlId, gridCredential);
 
             log.debug("Returning redirect with SLO request with HTTP POST binding to: " + singleLogoutEndpointUrl);
-            UtilitiesHelper.configureHttpResponse(response);
+            configureHttpResponse(response);
             String htmlFormContent = HttpPostBindingSupport.getHtmlPOSTFormContents(
                     SAMLMessageType.SAMLRequest,
                     singleLogoutEndpointUrl,
@@ -51,16 +65,27 @@ public class SamlSingleLogoutHandler {
         return false;
     }
 
+    /**
+     * TODO.
+     *
+     * @param singleLogoutEndpoint  single logout endpoint
+     * @param principalCommonName   principal common name
+     * @param authoritySessionIndex authority session index
+     * @param localSamlId           local SAML id
+     * @param gridCredential        client credentials
+     * @return logout request
+     * @throws SAMLResponderException thrown when problem occurs during signing request
+     */
     LogoutRequest createLogoutRequest(String singleLogoutEndpoint,
                                       String principalCommonName,
                                       String authoritySessionIndex,
                                       String localSamlId,
                                       X509Credential gridCredential) throws SAMLResponderException {
-        final NameIDType toBeLoggedOutIdentity = UtilitiesHelper.convertDistinguishedNameToNameID(principalCommonName);
-        final NameIDType portalGridIdentityIssuer = UtilitiesHelper.convertDistinguishedNameToNameID(localSamlId);
+        final NameIDType toBeLoggedOutIdentity = convertDistinguishedNameToNameIdType(principalCommonName);
+        final NameIDType portalGridIdentityIssuer = convertDistinguishedNameToNameIdType(localSamlId);
 
         LogoutRequest request = new LogoutRequest(portalGridIdentityIssuer, toBeLoggedOutIdentity);
-        request.setNotAfter(new Date(System.currentTimeMillis() + UtilitiesHelper.DEFAULT_LOGOUT_REQUEST_VALIDITY_IN_MILLIS));
+        request.setNotAfter(new Date(System.currentTimeMillis() + DEFAULT_LOGOUT_REQUEST_VALIDITY_IN_MILLIS));
         request.setSessionIds(authoritySessionIndex);
         request.getXMLBean().setDestination(singleLogoutEndpoint);
 

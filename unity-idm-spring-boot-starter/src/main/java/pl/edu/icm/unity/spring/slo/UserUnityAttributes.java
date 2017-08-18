@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UserUnityAttributes {
     private String commonName;
     private String emailAddress;
-    private String custodianDN;
+    private String custodianDn;
 
     private final Set<String> memberGroups = new TreeSet<>();
     private final Map<String, String> others = new ConcurrentHashMap<>();
@@ -24,8 +24,8 @@ public class UserUnityAttributes {
         return emailAddress;
     }
 
-    public String getCustodianDN() {
-        return custodianDN;
+    public String getCustodianDn() {
+        return custodianDn;
     }
 
     public Set<String> getMemberGroups() {
@@ -42,10 +42,17 @@ public class UserUnityAttributes {
 
     @Override
     public String toString() {
-        return String.format("UserUnityAttributes{commonName='%s', emailAddress='%s', custodianDN='%s', memberGroups=%s}",
-                commonName, emailAddress, custodianDN, memberGroups);
+        return String.format(
+                "UserUnityAttributes{commonName='%s', emailAddress='%s', custodianDn='%s', memberGroups=%s}",
+                commonName, emailAddress, custodianDn, memberGroups);
     }
 
+    /**
+     * Method that stores user attributes got from Unity IDM response.
+     *
+     * @param name property name
+     * @param value property value
+     */
     public void store(String name, String value) {
         switch (name) {
             case "cn":
@@ -55,7 +62,7 @@ public class UserUnityAttributes {
                 emailAddress = value;
                 break;
             case "TrustDelegationOfUser":
-                custodianDN = value;
+                custodianDn = value;
                 break;
             case "memberOf":
                 memberGroups.add(value);

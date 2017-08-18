@@ -11,12 +11,12 @@ allprojects {
     }
 
     project.ext.versions = [
-            springBoot: '1.5.4.RELEASE',
-            spock     : '1.1-groovy-2.4-rc-3',
-            wiremock  : '2.6.0',
+            springBoot: '1.5.6.RELEASE',
+            spock     : '1.1-groovy-2.4',
+            wiremock  : '2.7.1',
 
             checkstyle: '6.3',
-            gradle    : '3.5'
+            gradle    : '4.1'
     ]
 }
 

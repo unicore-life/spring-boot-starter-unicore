@@ -17,6 +17,13 @@ public class SingleLogoutHandler implements LogoutHandler {
     private final UnitySingleLogoutContext singleLogoutContext;
     private final String singleLogoutEndpointUrl;
 
+    /**
+     * Class which provides default Single Logout Handler for Unity IDM.
+     *
+     * @param singleLogoutHandler single logout handler
+     * @param singleLogoutContext single logout context
+     * @param unityIdmProperties unity idm properties
+     */
     public SingleLogoutHandler(SamlSingleLogoutHandler singleLogoutHandler,
                                UnitySingleLogoutContext singleLogoutContext,
                                UnityIdmProperties unityIdmProperties) {

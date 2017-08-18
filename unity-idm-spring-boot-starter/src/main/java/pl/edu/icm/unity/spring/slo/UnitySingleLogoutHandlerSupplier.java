@@ -21,6 +21,11 @@ public class UnitySingleLogoutHandlerSupplier {
         return this;
     }
 
+    /**
+     * Creates single logout handler instance {@see SingleLogoutHandler}.
+     *
+     * @return single logout handler
+     */
     public SingleLogoutHandler createSingleLogoutHandler() {
         if (singleLogoutContext == null) {
             throw new NullPointerException("Single logout context should be supplied!");

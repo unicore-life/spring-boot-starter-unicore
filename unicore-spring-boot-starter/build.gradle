@@ -12,15 +12,15 @@ apply plugin: 'com.novoda.bintray-release'
 
 
 dependencies {
-    compile 'org.slf4j:slf4j-api:1.7.22',
+    compile 'org.slf4j:slf4j-api:1.7.25',
             "org.springframework.boot:spring-boot:${versions.springBoot}",
             "org.springframework.boot:spring-boot-autoconfigure:${versions.springBoot}",
             'eu.unicore.workflow:common:2.8.4',
-            'eu.unicore:uas-client:1.9.6'
+            'eu.unicore:uas-client:1.9.7'
 
     testCompile "com.github.tomakehurst:wiremock:${versions.wiremock}",
-            'cglib:cglib-nodep:3.2.4',
-            'org.objenesis:objenesis:2.5.1',
+            'cglib:cglib-nodep:3.2.5',
+            'org.objenesis:objenesis:2.6',
             "org.spockframework:spock-core:${versions.spock}",
             "org.spockframework:spock-spring:${versions.spock}",
             "org.springframework.boot:spring-boot-starter-test:${versions.springBoot}"
