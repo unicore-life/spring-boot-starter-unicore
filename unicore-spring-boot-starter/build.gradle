@@ -15,11 +15,11 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.25',
             "org.springframework.boot:spring-boot:${versions.springBoot}",
             "org.springframework.boot:spring-boot-autoconfigure:${versions.springBoot}",
-            'eu.unicore.workflow:common:2.8.4',
-            'eu.unicore:uas-client:1.9.7'
+            'eu.unicore.workflow:common:2.8.5',
+            'eu.unicore:uas-client:1.9.9'
 
     testCompile "com.github.tomakehurst:wiremock:${versions.wiremock}",
-            'cglib:cglib-nodep:3.2.5',
+            'cglib:cglib-nodep:3.2.6',
             'org.objenesis:objenesis:2.6',
             "org.spockframework:spock-core:${versions.spock}",
             "org.spockframework:spock-spring:${versions.spock}",
